@@ -3,6 +3,11 @@
 Welcome to the homepage of Tax4Fun2 (under development).
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
 
+**Tax4Fun2 requirements**
+
+BLAST+ (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
+R packages seqinr, ape
+diamond v0.9.24 is needed for functional annotation (binaries for Windows and Linux are downloaded as part of the reference data), Mac users need to compile diamond. Please see the wiki for instructions.
 
 **Installation instructions**
 
