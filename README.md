@@ -29,6 +29,6 @@ Select 'Install packages ..' under Tools
 **Build the default reference database and download the example data**
 
 In order to provide a straight-forward solution, we implemented a function in Tax4Fun2 v1.1 which will download and build the reference database. A second function will download the example data. The example script with these two commands and all other functions can be found here:
-https://github.com/bwemheu/Tax4Fun2/releases/download/V1.1/Tax4Fun2_1.1_example.R
+https://github.com/bwemheu/Tax4Fun2/releases/download/v1.1.2/Tax4Fun2_1.1.2_example.R
 
 Have fun!
