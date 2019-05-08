@@ -1,4 +1,4 @@
-# Tax4Fun2
+# Tax4Fun2 v1.1.2
 
 Welcome to the homepage of Tax4Fun2 (under development).
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
@@ -14,7 +14,7 @@ diamond v0.9.24 is needed for functional annotation (binaries for Windows and Li
 **Installation instructions**
 
 1) Please download the latest release (version 1.1)
-https://github.com/bwemheu/Tax4Fun2/releases/download/V1.1/Tax4fun2_1.1.tar.gz
+https://github.com/bwemheu/Tax4Fun2/releases/download/v1.1.2/Tax4Fun2_1.1.2.tar.gz
 
 2) In RStudio
 Select 'Install packages ..' under Tools
