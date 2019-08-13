@@ -1,4 +1,4 @@
-# Tax4Fun2 v1.1.4 (prerelase need to test it on Windows and Mac; works on Linux)
+# Tax4Fun2 v1.1.4 (Pre-Release; needs to be tested on Windows and Mac; works fine on Linux)
 
 Welcome to the homepage of Tax4Fun2 (under development).
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
