@@ -1,4 +1,4 @@
-# Tax4Fun2 v1.1.4
+# Tax4Fun2 v1.1.4 (currently updating this site)
 
 Welcome to the homepage of Tax4Fun2.
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
