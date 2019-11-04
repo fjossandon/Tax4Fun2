@@ -189,21 +189,14 @@ runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2
 # 2) Predicting functional profiles
 makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = TRUE, min_identity_to_reference = 0.97, normalize_pathways = FALSE)
 ```
-**2. Making functional predictions using the default database without and with a user-gernated one***
-```
-# 1) Making functional predictions using the default database
-runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", use_force = T, num_threads = 6)
 
-# 2) Predicting functional profiles
-makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F)
-```
+**2) Making functional predictions using the default database and a user-generated database (unclustered)**
 
 *Additonal options:*
 - include_user_data = T > include user data in the prediction
 - name_of_user_data = "" > Provide a name for your database
 - path_to_user_data = "" > Specifiy the path to the data you would like to build your database from
 
-**2) Making functional predictions using the default database and a user-generated database (unclustered)**
 ```
 # 1. Generate user data (specify the path to the user data [here: KELP_UserData]); the database will be generated in the folder with your data
 generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1", fasta_extension = ".ffn", uproc_file_extension = ".txt")
@@ -215,7 +208,7 @@ runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2
 makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1")
 ```
 
-**3) Making functional predictions using the default database and a user-generated database (clustered with ucsearch)**
+**3) Making functional predictions using the default database and a user-generated database (clustered with usearch)**
 ```
 # 1. Generate user data (specify the path to the user data [here: KELP_UserData]); the database will be generated in the folder with your data
 generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2", fasta_extension = ".ffn", uproc_file_extension = ".txt", path_to_usearch_bin = "usearch.exe", similarity_threshold = 0.99)
