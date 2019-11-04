@@ -5,11 +5,15 @@ Older versions are also available under https://sourceforge.net/projects/tax4fun
 
 **Tax4Fun2 requirements**
 
-BLAST+ (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
+Tax4Fun2 only has one dependency:
++ BLAST (can be installed with the buildDependencies() command)
 
-R packages seqinr, ape
+To use all functions, you might want to install additional packages 
++ R packages seqinr and ape (can be installed with the buildDependencies() command)
 
-diamond v0.9.24 is needed for functional annotation (binaries for Windows and Linux are downloaded as part of the reference data), Mac users need to compile diamond. Please see the wiki for instructions.
++ diamond v0.9.24 is needed for functional annotation (binaries for Windows and Linux are downloaded as part of the reference data, Mac users need to compile diamond. Please see the wiki for instructions.)
+
++ A 32-bit or 64-bit version of usearch (A 32-bit version of usearch can be freely downloaded [here](https://www.drive5.com/usearch/). Note that some windows user might need to install the 32bit version of the Microsoft Visual C++ Redistributable to run usearch.)
 
 ## Install the Tax4Fun2 package, build the default reference data and install all dependencies
 **Download and install Tax4Fun2**
@@ -24,13 +28,13 @@ install.packages(pkgs = "Tax4Fun2_1.1.4.tar.gz", repos = NULL)
 **Load the Tax4Fun2 library and create a new folder for the installation**
 
 ```
-# Load the Tax4Fun2 library
+# 1) Load the Tax4Fun2 library
 library(Tax4Fun2)
 
-# Create a new folder
+# 2) Create a new folder
 dir.create(path = "Tax4Fun2")
 
-# Change working directory to the newly created folder
+# 3) Change working directory to the newly created folder
 setwd("Tax4Fun2")
 ```
 
@@ -58,7 +62,7 @@ Options:
   install_suggested_packages = TRUE    Install suggested R packages ape and seqinr (Default is TRUE)
 
 ```
-buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_suggested_packages = TRUE)
+buildDependencies(path_to_working_directory = ".", install_suggested_packages = TRUE)
 ```
 
 Those who wish to install blast on their own or make it available to all users, please check 
@@ -136,8 +140,7 @@ generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to
 # 2) Generate user-defined reference data without uclust
 generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "TEST2", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt", diamond_file_extension = "", use_force = T, path_to_usearch_bin = "usearch.exe")
 ```
-I recommend to use the second command which includes a uclust clustering step and thus removes redundancy in your data
-A 32-bit version of usearch can be downloaded [here](https://www.drive5.com/usearch/). Note that some windows user might need to install the 32bit version of the Microsoft Visual C++ Redistributable to run usearch.
+I recommend to use the second command which includes a uclust clustering step and thus removes redundancy in your data.
 
 ## Step 3: Making functional predictions
 
