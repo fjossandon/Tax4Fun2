@@ -37,15 +37,16 @@ dir.create(path = "Tax4Fun2")
 # 3) Change working directory to the newly created folder
 setwd("Tax4Fun2")
 ```
+If you ran getwd() in R, it should result in something like this: C:/Users/bwemheu/Desktop/Tax4Fun2 (on Windows)
 
 **Build the default reference database**
 
 In order to provide a straight-forward solution, we implemented a function in Tax4Fun2 v1.1 which will download and build the reference database. This buildReferenceData() command will download and build the default Tax4Fun2 reference database. In addition, it will install the R packages ape and seqinr if requested. Moreover, it will test for the presence of blastn in PATH.
 
-Options:
-  path_to_working_directory = "."      Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory)
-  use_force = FALSE                    Overwrite folder if exists (Default is FALSE)
-  install_suggested_packages = TRUE    Install suggested R packages ape and seqinr (Default is TRUE)
+*Options:*
+- path_to_working_directory = "." > Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory)
+- use_force = FALSE > Overwrite folder if exists (Default is FALSE)
+- install_suggested_packages = TRUE > Install suggested R packages ape and seqinr (Default is TRUE)
 
 ```
 buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_suggested_packages = TRUE)
@@ -57,24 +58,26 @@ We noticed some issues with the unzip command in Windows. Basically, the data wa
 
 This command will download the currently latest version of blast (v2.9.0) and will place the binaries in the Tax4Fun2 reference folder. In addition, it will test for the presence of the R packages ape and seqinr.
 
-Options:
-  path_to_reference_data = "."         Path to the folder Tax4Fun2 containing the reference data (Default: Build database in current working directory)
-  install_suggested_packages = TRUE    Install suggested R packages ape and seqinr (Default is TRUE)
+*Options:*
+- path_to_working_directory = "." > Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory)
+- use_force = FALSE > Overwrite folder if exists (Default is FALSE)
+- install_suggested_packages = TRUE > Install suggested R packages ape and seqinr (Default is TRUE)
 
 ```
 buildDependencies(path_to_working_directory = ".", install_suggested_packages = TRUE)
 ```
+Note that the working directory should be the same as for buildReferenceData()
 
 Those who wish to install blast on their own or make it available to all users, please check 
 [here](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
-for the latest package and download the appropiate version for your system. Note that Mac users might have issues opening a ftp site in Safari.
+for the latest version and download the appropiate file for your operating system. Note that Mac users might have issues opening a ftp site in Safari.
 
-For Mac users. Please run in terminal:
+*For Mac users*
 ```
-# Use curl to list the content of the ftp site
+# 1) Use curl to list the content of the ftp site
 curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
-# Select the dmg file (e.g. ncbi-blast-2.9.0+.dmg) and use wget to download the file
+# 2) Select the dmg file (e.g. ncbi-blast-2.9.0+.dmg) and use wget to download the file
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+.dmg
 ```
 
@@ -82,9 +85,9 @@ wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0
 
 This command will automatically download and build the Tax4Fun2 test data.
 
-Options:
-  path_to_working_directory = "."      Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory(
-  use_force = FALSE                    Overwrite folder if exists (Default is FALSE)
+*Options:*
+- path_to_working_directory = "." > Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory)
+- use_force = FALSE > Overwrite folder if exists (Default is FALSE)
 
 ```
 getExampleData(path_to_working_directory = ".", use_force = F)
@@ -96,7 +99,12 @@ Alternativly, check [here](https://cloudstor.aarnet.edu.au/plus/s/4htgFinDIpzOuK
 
 **1. Extracting SSU seqeunces (16S rRNA and 18S rRNA)**
 
-Either select one single genome (see first command below) or select a folder with several genomes or MAGs (see second command below). In order to use the second command, genomes must be placed in one folder (one file per genome) and all end with the same file extension (default is 'fasta')
+Either select one single genome (see first command below) or select a folder with several genomes or MAGs (see second command below).
+
+*Options:*
+- genome_file or genome_folder > Specify a single file or a folder with several genomes. Multiple genomes must be placed in one folder (one file per genome) and all end with the same file extension
+- file_extension = "fasta" > Fasta extension of the single genome file or multiple genome files (default is 'fasta')
+- path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
 
 ```
 # Option A) Extracting SSU sequences from a single genome
@@ -109,30 +117,45 @@ Note that genomes must have at least a single 16S or 18S rRNA gene sequences in 
 
 **2. Assigning functions to prokayotic genomes**
 
+*Options:*
+- genome_file or genome_folder > Specify a single file or a folder with several genomes. Multiple genomes must be placed in one folder (one file per genome) and all end with the same file extension
+- file_extension = "fasta" > Fasta extension of the single genome file or multiple genome files (default is 'fasta')
+- path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
+- num_of_threads = 1 > Number of parallel threads for diamond
+- fast = TRUE > Run diamond using the default way, FALSE would call diamond with --sensetive (might increase the sensetivity but is much slower)
+
 *Linux and Windows users*
 ```
 # Option A) Assigning function to a single genome
-assignFunction(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T)
+assignFunction(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = TRUE)
 
 # Option B) Assigning function to multiple genomes
-assignFunction(genome_folder = "MoreProkaryoticGenomes/", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T)
+assignFunction(genome_folder = "MoreProkaryoticGenomes/", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = TRUE)
 ```
 
 *Mac users*
 
-Mac users need to compile diamond first (see wiki for help) and have to provide the path to the compiled diamond binary
+Mac users need to compile diamond first (see wiki for help)
+
+*Additonal options:*
+- path_to_diamond_binary_mac = "" > Specifiy the path to the compiled diamond executable
+
 ```
 # Option A) Assigning function to a single genome
-assignFunction(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T, path_to_diamond_binary_mac = "./diamond")
+assignFunction(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T, path_to_diamond_binary_mac = "diamond")
 
 # Option B) Assigning function to multiple genomes
-assignFunction(genome_folder = "MoreProkaryoticGenomes/", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T, path_to_diamond_binary_mac = "./diamond")
+assignFunction(genome_folder = "MoreProkaryoticGenomes/", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", num_of_threads = 1, fast = T, path_to_diamond_binary_mac = "diamond")
 ```
 
 **3. Generate the reference data**
 
-After extraction of SSU sequences and functional assignments, you will have at least two files for each genome: one with the SSU seqeunces and one with the functional profile
+After extraction of SSU sequences and functional assignments, you will have at least two files for each genome: one with the SSU sequences and one with the functional profile
 In order to generate the final dataset, select the folder where these files and provide the correct file extensions (removing the respective file extensions will result in the same filename)
+
+*Options:*
+- path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
+
 ```
 # 1) Generate user-defined reference data without uclust
 generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "TEST1", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
@@ -144,15 +167,28 @@ I recommend to use the second command which includes a uclust clustering step an
 
 ## Step 3: Making functional predictions
 
+Note that you should format your otu table in the same way as the otu tables in the test data are formated.
+
 **1. Making functional predictions using the default reference data only**
+
+*Options:*
+- path_to_otus = "" > Specifiy the path to the fasta file containing your otu seqeunces
+- path_to_otu_table = "" > Specifiy the path to the otu table
+- path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
+- path_to_temp_folder = "" > Specifiy the path to the tempory folder. Results will be stored here.
+- database_mode = "Ref99NR" > Run either with 'Ref99NR' or 'Ref100NR' as database mode. The number refers to the clustering threshold used in uclust (99% and 100%, respectively)
+- num_threads = 6 > Number of parallel threads for diamond
+- use_force = TRUE >  > Overwrite folder if exists (Default is FALSE)
+- normalize_by_copy_number = TRUE > normalize by the average number of 16S rRNA copies calculated for each sequence in the reference database
+- normalize_pathways = FALSE will affiliate the rel. abundance of each KO to each pathway it belongs to. By setting it to true, the rel. abundance is equally distributed to all pathways it was assigned to.)
+
 ```
 # 1. Run the reference blast
 runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", use_force = T, num_threads = 6)
+
 # 2) Predicting functional profiles
 makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = TRUE, min_identity_to_reference = 0.97, normalize_pathways = FALSE)
 ```
-Note: normalize_pathways = FALSE will affiliate the rel. abundance of each KO to each pathway it belongs to. By setting it to true, the rel. abundance is equally distributed to all pathways it was assigned to.)
-
 **2. Making functional predictions using the default database without and with a user-gernated one***
 ```
 # 1) Making functional predictions using the default database
@@ -162,16 +198,21 @@ runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2
 makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F)
 ```
 
+*Additonal options:*
+- include_user_data = T > include user data in the prediction
+- name_of_user_data = "" > Provide a name for your database
+- path_to_user_data = "" > Specifiy the path to the data you would like to build your database from
+
 **2) Making functional predictions using the default database and a user-generated database (unclustered)**
 ```
 # 1. Generate user data (specify the path to the user data [here: KELP_UserData]); the database will be generated in the folder with your data
 generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1", fasta_extension = ".ffn", uproc_file_extension = ".txt")
 
 # 2. Run the reference blast with include_user_data = TRUE and specifiy the path to the user data [here: KELP_UserData/KELP1]
-runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData/KELP1")
+runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1")
 
 # 3. Making the prediction with your data included
-makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F, include_user_data = T, path_to_user_data = "KELP_UserData/KELP1")
+makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1")
 ```
 
 **3) Making functional predictions using the default database and a user-generated database (clustered with ucsearch)**
@@ -180,10 +221,10 @@ makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_refer
 generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2", fasta_extension = ".ffn", uproc_file_extension = ".txt", path_to_usearch_bin = "usearch.exe", similarity_threshold = 0.99)
 
 # 2. Run the reference blast with include_user_data = TRUE and specifiy the path to the user data [here: KELP_UserData/KELP1]
-runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser2", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData/KELP2")
+runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser2", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2")
 
 # 3. Making the prediction with your data included
-makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser2", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F, include_user_data = T, path_to_user_data = "KELP_UserData/KELP2")
+makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser2", database_mode = "Ref99NR", normalize_by_copy_number = T, min_identity_to_reference = 0.97, normalize_pathways = F, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2")
 ```
 
 ## Step 4: Calculating (multi-)functional redundancy indices (experimental)
