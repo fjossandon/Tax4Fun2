@@ -52,7 +52,7 @@ In order to provide a straight-forward solution, we implemented a function in Ta
 buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_suggested_packages = TRUE)
 ```
 
-We noticed some issues with the unzip command in Windows. Basically, the data was download but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the data.
+We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the full reference data. Simply unzip the file afterwards.
 
 **Install dependencies**
 
