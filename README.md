@@ -159,11 +159,14 @@ In order to generate the final dataset, select the folder where these files and 
 - path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
 
 ```
-# 1) Generate user-defined reference data without uclust
-generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "TEST1", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
+# 1) Generate user-defined reference data without uclust from a single genome
+generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = ".", name_of_user_data = "User_Ref0", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
 
 # 2) Generate user-defined reference data without uclust
-generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "TEST2", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt", diamond_file_extension = "", use_force = T, path_to_usearch_bin = "usearch.exe")
+generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref1", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
+
+# 3) Generate user-defined reference data without uclust
+generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref2", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt", diamond_file_extension = "", use_force = T, path_to_usearch_bin = "usearch.exe")
 ```
 I recommend to use the second command which includes a uclust clustering step and thus removes redundancy in your data.
 
