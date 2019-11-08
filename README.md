@@ -5,7 +5,7 @@ Older versions are also available under https://sourceforge.net/projects/tax4fun
 
 **Tax4Fun2 requirements**
 
-Tax4Fun2 only has one dependency:
+Tax4Fun2 has one dependency:
 + BLAST (can be installed with the buildDependencies() command)
 
 To use all functions, you might want to install additional packages 
