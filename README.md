@@ -1,4 +1,4 @@
-# Tax4Fun2 v1.1.4 (currently updating this site)
+# Tax4Fun2 v1.1.4
 
 Welcome to the homepage of Tax4Fun2.
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
@@ -41,7 +41,7 @@ If you ran getwd() in R, it should result in something like this: C:/Users/bwemh
 
 **Build the default reference database**
 
-In order to provide a straight-forward solution, we implemented a function in Tax4Fun2 v1.1 which will download and build the reference database. This buildReferenceData() command will download and build the default Tax4Fun2 reference database. In addition, it will install the R packages ape and seqinr if requested. Moreover, it will test for the presence of blastn in PATH.
+In order to provide a straight-forward solution, we implemented a function in Tax4Fun2 v1.1 which will download and build the reference database. This buildReferenceData() command will download and build the default Tax4Fun2 reference database. In addition, it will install the R packages ape and seqinr if requested. Moreover, it will test for the presence of blastn in PATH. To ensure that the download was successful, the function will also automatically check the downloaded data for consistency using md5sums.
 
 *Options:*
 - path_to_working_directory = "." > Path to the folder for Tax4Fun2 installation (Default: Build database in current working directory)
@@ -52,7 +52,7 @@ In order to provide a straight-forward solution, we implemented a function in Ta
 buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_suggested_packages = TRUE)
 ```
 
-We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the full reference data. Simply unzip the file afterwards.
+We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the full reference data. Simply extract the reference data afterwards.
 
 **Install dependencies**
 
@@ -78,7 +78,9 @@ for the latest version and download the appropiate file for your operating syste
 curl ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
 # 2) Select the dmg file (e.g. ncbi-blast-2.9.0+.dmg) and use wget to download the file
+# (You need to concatenate 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/' and 'ncbi-blast-2.9.0+.dmg')
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.9.0+.dmg
+
 ```
 
 **Download the test data**
