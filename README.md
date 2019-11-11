@@ -64,7 +64,7 @@ This command will download the currently latest version of blast (v2.9.0) and wi
 - install_suggested_packages = TRUE > Install suggested R packages ape and seqinr (Default is TRUE)
 
 ```
-buildDependencies(path_to_working_directory = ".", install_suggested_packages = TRUE)
+buildDependencies(path_to_reference_data = "", install_suggested_packages = TRUE)
 ```
 Note that the working directory should be the same as for buildReferenceData()
 
