@@ -52,7 +52,16 @@ In order to provide a straight-forward solution, we implemented a function in Ta
 buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_suggested_packages = TRUE)
 ```
 
-We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the full reference data. Simply extract the reference data afterwards.
+***The path to the working directory is different from the path to the reference data!!!***
+*For instance:
+path_to_working_directory = "~/Tax4Fun2/"
+path_to_reference_data = "~/Tax4Fun2/Tax4Fun2_ReferenceData_v1.1"*
+
+We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/PL7ieXPOP6mp1hA/download) to download the full reference data. Simply extract the reference data afterwards. We implemented a function to test the downloaded database for consistency.
+
+```
+testReferenceData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1")
+```
 
 **Install dependencies**
 
