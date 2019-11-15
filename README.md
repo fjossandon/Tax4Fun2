@@ -101,7 +101,7 @@ This command will automatically download and build the Tax4Fun2 test data.
 - use_force = FALSE > Overwrite folder if exists (Default is FALSE)
 
 ```
-getExampleData(path_to_working_directory = ".", use_force = F)
+getExampleData(path_to_working_directory = ".")
 ```
 Alternativly, check [here](https://cloudstor.aarnet.edu.au/plus/s/4htgFinDIpzOuKK/download) to download the data.
 
@@ -166,16 +166,21 @@ In order to generate the final dataset, select the folder where these files and 
 
 *Options:*
 - path_to_refernce_data = "" > Specifiy the path to the folder with the reference data
+- path_to_user_data = "" > Specifiy the path to the folder with your genomes (after runnung them through the extractSSU and assignFunction command
+- name_of_user_data = "" > Specify a name for your data. a folder will be generated in the folder with your data haing this name
+- SSU_file_extension = "_16SrRNA.ffn"
+- KEGG_file_extension = "_funPro.txt"
+- path_to_usearch_bin = "" > Specify the path to the usearch binary.
 
 ```
 # 1) Generate user-defined reference data without uclust from a single genome
-generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = ".", name_of_user_data = "User_Ref0", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
+generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = ".", name_of_user_data = "User_Ref0", SSU_file_extension = "_16SrRNA.ffn", KEGG_file_extension = "_funPro.txt")
 
 # 2) Generate user-defined reference data without uclust
-generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref1", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt")
+generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref1", SSU_file_extension = "_16SrRNA.ffn", KEGG_file_extension = "_funPro.txt")
 
 # 3) Generate user-defined reference data without uclust
-generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref2", fasta_extension = "_16SrRNA.ffn", uproc_file_extension = "_funPro.txt", diamond_file_extension = "", use_force = T, path_to_usearch_bin = "usearch.exe")
+generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "MoreProkaryoticGenomes", name_of_user_data = "User_Ref2", SSU_file_extension = "_16SrRNA.ffn", KEGG_file_extension = "_funPro.txt", use_force = T, path_to_usearch_bin = "usearch.exe")
 ```
 I recommend to use the second command which includes a uclust clustering step and thus removes redundancy in your data.
 
@@ -213,7 +218,7 @@ makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_refer
 
 ```
 # 1. Generate user data (specify the path to the user data [here: KELP_UserData]); the database will be generated in the folder with your data
-generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1", fasta_extension = ".ffn", uproc_file_extension = ".txt")
+generateUserData(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1", SSU_file_extension = ".ffn", KEGG_file_extension = ".txt")
 
 # 2. Run the reference blast with include_user_data = TRUE and specifiy the path to the user data [here: KELP_UserData/KELP1]
 runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser1", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP1")
@@ -225,7 +230,7 @@ makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_refer
 **3) Making functional predictions using the default database and a user-generated database (clustered with usearch)**
 ```
 # 1. Generate user data (specify the path to the user data [here: KELP_UserData]); the database will be generated in the folder with your data
-generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2", fasta_extension = ".ffn", uproc_file_extension = ".txt", path_to_usearch_bin = "usearch.exe", similarity_threshold = 0.99)
+generateUserDataByClustering(path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2", SSU_file_extension = ".ffn", KEGG_file_extension = ".txt", path_to_usearch_bin = "usearch.exe", similarity_threshold = 0.99)
 
 # 2. Run the reference blast with include_user_data = TRUE and specifiy the path to the user data [here: KELP_UserData/KELP1]
 runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v1.1", path_to_temp_folder = "Kelp_Ref99NR_withUser2", database_mode = "Ref99NR", use_force = T, num_threads = 6, include_user_data = T, path_to_user_data = "KELP_UserData", name_of_user_data = "KELP2")
