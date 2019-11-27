@@ -54,12 +54,12 @@ buildReferenceData(path_to_working_directory = ".", use_force = FALSE, install_s
 path_to_working_directory = "C:/Users/your_name/Desktop/Tax4Fun2"
 path_to_reference_data = "C:/Users/your_name/Desktop/Tax4Fun2/Tax4Fun2_ReferenceData_v2"*
 
-We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/SoZAwtDHHDMjRX9/download) to download the full reference data. Simply extract the reference data afterwards. We implemented a function to test the downloaded database for consistency.
+We noticed some issues with the unzip command in Windows. Basically, the data was downloaded but couldn't be unzipped. In case you have issues here, click [here](https://cloudstor.aarnet.edu.au/plus/s/OoKjFHWmyKcc48V/download) to download the full reference data. Simply extract the reference data afterwards. We implemented a function to test the downloaded database for consistency.
 or run in terminal:
 
 ```
 1) Download the data
-wget -O RefData.zip https://cloudstor.aarnet.edu.au/plus/s/SoZAwtDHHDMjRX9/download
+wget -O RefData.zip https://cloudstor.aarnet.edu.au/plus/s/OoKjFHWmyKcc48V/download
 
 2) Decompress the data
 unzip RefData.zip
