@@ -1,4 +1,4 @@
-# Tax4Fun2 v1.1.5
+# Tax4Fun2 v1.1.6
 
 Welcome to the homepage of Tax4Fun2.
 Older versions are also available under https://sourceforge.net/projects/tax4fun2/
@@ -21,12 +21,12 @@ Since version 1.1.5, Tax4Fun2 uses vsearch for sequence clustering (vsearch is d
 1a) Click [here](https://github.com/bwemheu/Tax4Fun2/releases/download/1.1.5/Tax4Fun2_1.1.5.tar.gz) to download the latest R package
 1b) or run in a terminal window:
 ```
-wget https://github.com/bwemheu/Tax4Fun2/releases/download/1.1.5/Tax4Fun2_1.1.5.tar.gz
+wget https://github.com/bwemheu/Tax4Fun2/releases/download/1.1.6/Tax4Fun2_1.1.6.tar.gz
 ```
 
 2) Install the package in R using the command below
 ```
-install.packages(pkgs = "Tax4Fun2_1.1.4.tar.gz", repos = NULL, source = TRUE)
+install.packages(pkgs = "Tax4Fun2_1.1.6.tar.gz", repos = NULL, source = TRUE)
 ```
 
 
