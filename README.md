@@ -127,10 +127,10 @@ Either select one single genome (see first command below) or select a folder wit
 
 ```
 # Option A) Extracting SSU sequences from a single genome
-extractSSU(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_refernce_data = "Tax4Fun2_ReferenceData_v2")
+extractSSU(genome_file = "OneProkaryoticGenome.fasta", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v2")
 
 # Option B) Extracting SSU sequences from multiple genomes
-extractSSU(genome_folder = "MoreProkaryoticGenomes", file_extension = "fasta", path_to_refernce_data = "Tax4Fun2_ReferenceData_v2")
+extractSSU(genome_folder = "MoreProkaryoticGenomes", file_extension = "fasta", path_to_reference_data = "Tax4Fun2_ReferenceData_v2")
 ```
 Note that genomes must have at least a single 16S or 18S rRNA gene sequences in thier genome. Check output after running the command to remove 'empty' genomes (those where the file size is 0)
 
@@ -214,6 +214,11 @@ runRefBlast(path_to_otus = "KELP_otus.fasta", path_to_reference_data = "Tax4Fun2
 
 # 2) Predicting functional profiles
 makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v2", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = TRUE, min_identity_to_reference = 0.97, normalize_pathways = FALSE)
+
+# or:
+
+makeFunctionalPrediction(path_to_otu_table = "KELP_otu_table.txt", path_to_reference_data = "Tax4Fun2_ReferenceData_v2", path_to_temp_folder = "Kelp_Ref99NR", database_mode = "Ref99NR", normalize_by_copy_number = TRUE, min_identity_to_reference = 0.97, normalize_pathways = TRUE)
+
 ```
 
 **2) Making functional predictions using the default database and a user-generated database (unclustered)**
