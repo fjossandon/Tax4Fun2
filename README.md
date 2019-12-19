@@ -26,7 +26,7 @@ wget https://github.com/bwemheu/Tax4Fun2/releases/download/1.1.5/Tax4Fun2_1.1.5.
 
 2) Install the package in R using the command below
 ```
-install.packages(pkgs = "Tax4Fun2_1.1.6.tar.gz", repos = NULL, source = TRUE)
+install.packages(pkgs = "Tax4Fun2_1.1.5.tar.gz", repos = NULL, source = TRUE)
 ```
 
 
