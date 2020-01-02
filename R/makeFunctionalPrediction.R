@@ -126,7 +126,12 @@ makeFunctionalPrediction = function(path_to_otu_table, path_to_reference_data = 
   # Converting the KO profile to a profile of KEGG pathways
   message('Converting functions to pathways')
   ko2ptw = read.delim(file.path(path_to_reference_data, 'KEGG/ko2ptw.txt'))
-  if(normalize_pathways) functional_prediction_norm = functional_prediction / ko_list$pathway_count
+  if(normalize_pathways)
+  {
+    functional_prediction_norm = functional_prediction / ko_list$ptw_count
+    functional_prediction = functional_prediction_norm
+  }
+
   pathway_prediction = aggregate(x = functional_prediction[ko2ptw$nrow,], by = list(ko2ptw$ptw), sum)
   if(ncol(pathway_prediction) >= 3)
   {
