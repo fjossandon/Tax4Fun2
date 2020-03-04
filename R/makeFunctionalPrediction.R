@@ -145,9 +145,11 @@ makeFunctionalPrediction = function(
   
   # Converting the KO profile to a profile of KEGG pathways
   message('Converting functions to pathways')
+  if(write_counts) functional_prediction = functional_prediction_counts
   ko2ptw = read.delim(file.path(path_to_reference_data, 'KEGG/ko2ptw.txt'))
   if(normalize_pathways) functional_prediction = functional_prediction / ko_list$ptw_count
   pathway_prediction = aggregate(x = functional_prediction[ko2ptw$nrow,], by = list(ko2ptw$ptw), sum)
+  if(write_counts) pathway_prediction_counts = pathway_prediction
   if(ncol(pathway_prediction) >= 3)
   {
     col_sums = colSums(pathway_prediction[,-1])
@@ -161,8 +163,11 @@ makeFunctionalPrediction = function(
   if(sum(pathway_prediction[,-1]) == 0) stop("Conversion to pathway failed!")
   names(pathway_prediction) = names(otu_table)
   names(pathway_prediction)[1] = 'pathway'
+  if(write_counts) names(pathway_prediction_counts) = names(pathway_prediction)
 
   ptw_desc = read.delim(paste(path_to_reference_data, '/KEGG/ptw.txt', sep = ''))
   pathway_prediction_final = merge(pathway_prediction, ptw_desc)[keep,]
+  if(write_counts) pathway_prediction_counts_final = merge(pathway_prediction_counts, ptw_desc)[keep,]
   write.table(x = pathway_prediction_final, file = file.path(path_to_temp_folder, 'pathway_prediction.txt'), append = F, quote = F, sep = "\t", row.names = F, col.names = T)
+  if(write_counts) write.table(x = pathway_prediction_counts_final, file = file.path(path_to_temp_folder, 'pathway_prediction_counts.txt'), append = F, quote = F, sep = "\t", row.names = F, col.names = T)
 }
