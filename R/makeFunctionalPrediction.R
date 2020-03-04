@@ -1,4 +1,16 @@
-makeFunctionalPrediction = function(path_to_otu_table, path_to_reference_data = "Tax4Fun2_ReferenceData_v2", path_to_temp_folder = "Tax4Fun2_prediction", database_mode = 'Ref100NR', normalize_by_copy_number = T, min_identity_to_reference = 97, include_user_data = F, path_to_user_data = '', name_of_user_data = '', use_uproc = T, normalize_pathways = F)
+makeFunctionalPrediction = function(
+  path_to_otu_table,
+  path_to_reference_data = "Tax4Fun2_ReferenceData_v2",
+  path_to_temp_folder = "Tax4Fun2_prediction",
+  database_mode = 'Ref100NR',
+  normalize_by_copy_number = T,
+  min_identity_to_reference = 97,
+  include_user_data = F,
+  path_to_user_data = '',
+  name_of_user_data = '',
+  use_uproc = T,
+  normalize_pathways = F,
+  write_counts = F)
 {
   # Read old log file to control the database mode
   path_to_log_file = file.path(path_to_temp_folder, 'logfile1.txt')
@@ -106,22 +118,30 @@ makeFunctionalPrediction = function(path_to_otu_table, path_to_reference_data = 
   # Calculate functional profiles sample-wise
   message('Generating functional profile for:')
   functional_prediction = NULL
+  functional_prediction_counts = NULL
   for(sample in 2:ncol(otu_table_reduced_aggregated))
   {
     message(names(otu_table_reduced_aggregated[sample]))
     functional_prediction_sample = reference_profile * as.numeric(otu_table_reduced_aggregated[,sample])
     functional_prediction_sample = colMeans(functional_prediction_sample)
+    # Functional counts
+    if(write_counts) functional_prediction_counts = cbind(functional_prediction_counts, functional_prediction_sample)
+    # Functional percents
     functional_prediction_sample = functional_prediction_sample / sum(functional_prediction_sample)
     if(is.na(sum(functional_prediction_sample))) functional_prediction_sample[1:nrow(ko_list)] = 0
     functional_prediction = cbind(functional_prediction, functional_prediction_sample)
   }
   colnames(functional_prediction) = names(otu_table)[2:ncol(otu_table_reduced_aggregated)]
+  if(write_counts) colnames(functional_prediction_counts) = names(otu_table)[2:ncol(otu_table_reduced_aggregated)]
   functional_prediction_final = data.frame(KO = ko_list$ko, functional_prediction, description = ko_list$description)
+  if(write_counts) functional_prediction_counts_final = data.frame(KO = ko_list$ko, functional_prediction_counts, description = ko_list$description)
   if(ncol(functional_prediction) >= 2) keep = which(rowSums(functional_prediction) > 0)
   if(ncol(functional_prediction) == 1) keep = which(functional_prediction > 0)
   if (length(keep) == 0) stop("No functional prediction possible!\nEither no nearest neighbor found or your table is empty!")
   functional_prediction_final = functional_prediction_final[keep,]
+  if(write_counts) functional_prediction_counts_final = functional_prediction_counts_final[keep,]
   write.table(x = functional_prediction_final, file = file.path(path_to_temp_folder, 'functional_prediction.txt'), append = F, quote = F, sep = "\t", row.names = F, col.names = T)
+  if(write_counts) write.table(x = functional_prediction_counts_final, file = file.path(path_to_temp_folder, 'functional_prediction_counts.txt'), append = F, quote = F, sep = "\t", row.names = F, col.names = T)
   
   # Converting the KO profile to a profile of KEGG pathways
   message('Converting functions to pathways')
